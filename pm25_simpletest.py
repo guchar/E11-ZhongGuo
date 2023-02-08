@@ -11,6 +11,7 @@ import board
 import busio
 from digitalio import DigitalInOut, Direction, Pull
 from adafruit_pm25.i2c import PM25_I2C
+import csv
 
 
 reset_pin = None
@@ -26,7 +27,7 @@ reset_pin = None
 
 # For use with microcontroller board:
 # (Connect the sensor TX pin to the board/computer RX pin)
-uart = busio.UART(board.TX, board.RX, baudrate=9600)
+# uart = busio.UART(board.TX, board.RX, baudrate=9600)
 
 # For use with Raspberry Pi/Linux:
 import serial
@@ -47,8 +48,19 @@ pm25 = PM25_UART(uart, reset_pin)
 
 print("Found PM2.5 sensor, reading data...")
 
-while True:
+file = open("data.csv", "w")
+writer = csv.writer(file)
+
+startTime = time.time() 
+
+while (time.time() - startTime) < 30:
     time.sleep(1)
+
+    writer.writerow("Current timestamp: " + time.time())
+    writer.writerow("Concentration Units (standard)")
+    writer.writerow("---------------------------------------")
+
+    print("")
 
     try:
         aqdata = pm25.read()
@@ -57,6 +69,11 @@ while True:
         print("Unable to read from sensor, retrying...")
         continue
 
+    writer.writerow("PM 1.0: %d\tPM2.5: %d\tPM10: %d"
+        % (aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"]))
+
+
+    print("Current timestamp: " + time.time())
     print()
     print("Concentration Units (standard)")
     print("---------------------------------------")
@@ -78,3 +95,5 @@ while True:
     print("Particles > 5.0um / 0.1L air:", aqdata["particles 50um"])
     print("Particles > 10 um / 0.1L air:", aqdata["particles 100um"])
     print("---------------------------------------")
+
+file.close() 
