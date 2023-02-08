@@ -59,9 +59,6 @@ while (time.time() - startTime) < 30:
     writer.writerow("Current timestamp: " + time.time())
     writer.writerow("Concentration Units (standard)")
     writer.writerow("---------------------------------------")
-
-    print("")
-
     try:
         aqdata = pm25.read()
         # print(aqdata)
@@ -95,5 +92,7 @@ while (time.time() - startTime) < 30:
     print("Particles > 5.0um / 0.1L air:", aqdata["particles 50um"])
     print("Particles > 10 um / 0.1L air:", aqdata["particles 100um"])
     print("---------------------------------------")
+
+    print("")
 
 file.close() 
