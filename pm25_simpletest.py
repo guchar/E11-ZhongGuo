@@ -77,7 +77,7 @@ while (time.time() - startTime) < 30:
 
     data = ["{}:{}:{}".format(myobj.hour, myobj.minute, myobj.second), aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"]]
 
-    for x in range(metadata.length()): 
+    for x in range(metadata.len()): 
         file.write(metadata[x] + " " + data[x])
 
     # writer.writerow("PM 1.0: %d\tPM2.5: %d\tPM10: %d"
