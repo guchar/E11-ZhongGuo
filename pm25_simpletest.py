@@ -71,7 +71,7 @@ while (time.time() - startTime) < 30:
         % (aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"]))
 
 
-    print("Current timestamp: " + time.time())
+    print("Current timestamp: ", time.time())
     print()
     print("Concentration Units (standard)")
     print("---------------------------------------")
