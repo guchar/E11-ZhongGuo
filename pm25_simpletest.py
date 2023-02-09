@@ -56,7 +56,8 @@ startTime = time.time()
 while (time.time() - startTime) < 30:
     time.sleep(1)
 
-    writer.writerow("Current timestamp: ", time.time())
+    writer.writerow("Current timestamp: ") 
+    writer.writerow(time.time())
     writer.writerow("Concentration Units (standard)")
     writer.writerow("---------------------------------------")
     try:
