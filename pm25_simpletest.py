@@ -60,7 +60,7 @@ while (time.time() - startTime) < 30:
     time.sleep(1)
 
     writer.writerow("Current timestamp: ") 
-    writer.writerow("{}:{}:{}".format(myobj.hours, myobj.minutes, myobj.seconds))
+    writer.writerow("{}:{}:{}".format(myobj.hour, myobj.minute, myobj.second))
     writer.writerow("Concentration Units (standard)")
     writer.writerow("---------------------------------------")
     try:
