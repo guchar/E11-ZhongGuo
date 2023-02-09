@@ -55,18 +55,21 @@ writer = csv.writer(file)
 
 startTime = time.time() 
 
+metadata = ["Timestamp", "PM 1.0", "PM 2.5", "PM 10"]
+
+
+writer.writerow(metadata)
+
 
 while (time.time() - startTime) < 30:
     time.sleep(1)
 
     myobj = datetime.now()
 
-    metadata = ["Timestamp", "PM 1.0", "PM 2.5", "PM 10"]
     
-
     # writer.writerow("Current timestamp: ") 
-    # writer.writerow("{}:{}:{}".format(myobj.hour, myobj.minute, myobj.second))
-    # writer.writerow("Concentration Units (standard)")
+    # writer.writerow(["{}:{}:{}".format(myobj.hour, myobj.minute, myobj.second)])
+    # writer.writerow(["Concentration Units (standard)"])
     # writer.writerow("---------------------------------------")
     try:
         aqdata = pm25.read()
@@ -77,8 +80,8 @@ while (time.time() - startTime) < 30:
 
     data = ["{}:{}:{}".format(myobj.hour, myobj.minute, myobj.second), aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"]]
 
-    for x in range(len(metadata)): 
-        file.write(metadata[x], " ", data[x])
+
+    writer.writerow(data)
 
     # writer.writerow("PM 1.0: %d\tPM2.5: %d\tPM10: %d"
     #     % (aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"]))
