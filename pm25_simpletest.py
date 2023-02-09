@@ -13,7 +13,6 @@ from digitalio import DigitalInOut, Direction, Pull
 from adafruit_pm25.i2c import PM25_I2C
 import csv
 from datetime import datetime
-myobj = datetime.now()
 
 
 
@@ -56,8 +55,11 @@ writer = csv.writer(file)
 
 startTime = time.time() 
 
+
 while (time.time() - startTime) < 30:
     time.sleep(1)
+
+    myobj = datetime.now()
 
     writer.writerow("Current timestamp: ") 
     writer.writerow("{}:{}:{}".format(myobj.hour, myobj.minute, myobj.second))
