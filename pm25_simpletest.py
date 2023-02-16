@@ -70,7 +70,7 @@ writer.writerow(metadata)
 
 while itime < (startTime + run_time):
     time.sleep(1)
-
+    current_time = time.time()
     myobj = datetime.now()
 
     
@@ -85,7 +85,7 @@ while itime < (startTime + run_time):
         print("Unable to read from sensor, retrying...")
         continue
 
-    data = ["{}:{}:{} + {}:{}:{}:{}:{}".format(myobj.hour, myobj.minute, myobj.second), aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"], bme680.temperature, bme680.gas, bme680.relative_humidity, bme680.pressure, bme680.altitude]
+    data = [current_time, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"], bme680.temperature, bme680.gas, bme680.relative_humidity, bme680.pressure, bme680.altitude]
 
 
     writer.writerow(data)
