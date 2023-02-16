@@ -59,7 +59,7 @@ start_time = time.time()
 run_time = int(sys.argv[1])
 itime = start_time
 
-datafile = int(sys.argv[2])
+datafile = sys.argv[2]
 file = open(datafile, "w")
 writer = csv.writer(file)
 
