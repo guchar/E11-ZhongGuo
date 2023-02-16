@@ -11,6 +11,7 @@ import board
 import busio
 from digitalio import DigitalInOut, Direction, Pull
 from adafruit_pm25.i2c import PM25_I2C
+import adafruit.bme680 
 import csv
 from datetime import datetime
 import sys
@@ -58,7 +59,12 @@ startTime = time.time()
 itime = startTime
 run_time = int(sys.argv[1])
 
-metadata = ["Timestamp", "PM 1.0", "PM 2.5", "PM 10"]
+i2c = board.I2C()
+bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c)
+bme680.sea_level_pressure=1013.25
+count_time = 0
+
+metadata = ["Timestamp", "PM 1.0", "PM 2.5", "PM 10", "Temperature", "Gas", "Humidity", "Pressure", "Altitude"]
 
 writer.writerow(metadata)
 
@@ -79,7 +85,7 @@ while itime < (startTime + run_time):
         print("Unable to read from sensor, retrying...")
         continue
 
-    data = ["{}:{}:{}".format(myobj.hour, myobj.minute, myobj.second), aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"]]
+    data = ["{}:{}:{} + {}:{}:{}:{}:{}".format(myobj.hour, myobj.minute, myobj.second), aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"], bme680.temperature, bme680.gas, bme680.relative_humidity, bme680.pressure, bme680.altitude]
 
 
     writer.writerow(data)
@@ -115,10 +121,7 @@ while itime < (startTime + run_time):
 
 now = datetime.now()
 
-i2c = board.I2C()
-bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c)
-bme680.sea_level_pressure=1013.25
-count_time = 0
+
 
 while count_time < 10:
 	now = datetime.now()
