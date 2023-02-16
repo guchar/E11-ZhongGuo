@@ -54,14 +54,16 @@ pm25 = PM25_UART(uart, reset_pin)
 # pm25 = PM25_I2C(i2c, reset_pin)
 
 print("Found PM2.5 sensor, reading data...")
-today = date.today()
-
-file = open("data" + today.strftime("%m/%d/%y"), "w")
-writer = csv.writer(file)
 
 start_time = time.time()
 run_time = int(sys.argv[1])
 itime = start_time
+
+datafile = sys.argv[2]
+file = open(datafile, "w")
+writer = csv.writer(file)
+
+
 
 i2c = board.I2C()
 bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c)
