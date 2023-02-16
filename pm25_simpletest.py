@@ -55,9 +55,9 @@ print("Found PM2.5 sensor, reading data...")
 file = open("data.csv", "w")
 writer = csv.writer(file)
 
-startTime = time.time() 
-itime = startTime
+start_time = time.time()
 run_time = int(sys.argv[1])
+itime = start_time
 
 i2c = board.I2C()
 bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c)
@@ -68,7 +68,7 @@ metadata = ["Timestamp", "PM 1.0", "PM 2.5", "PM 10", "Temperature", "Gas", "Hum
 
 writer.writerow(metadata)
 
-while itime < (startTime + run_time):
+while itime < (start_time + run_time):
     time.sleep(1)
     current_time = time.time()
     myobj = datetime.now()
