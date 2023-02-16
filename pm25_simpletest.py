@@ -11,7 +11,7 @@ import board
 import busio
 from digitalio import DigitalInOut, Direction, Pull
 from adafruit_pm25.i2c import PM25_I2C
-import adafruit.bme680 
+import adafruit_bme680 
 import csv
 from datetime import datetime
 import sys
@@ -35,7 +35,7 @@ reset_pin = None
 
 # For use with Raspberry Pi/Linux:
 import serial
-uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=0.25)
+uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=0.2=95)
 
 # For use with USB-to-serial cable:
 # import serial
