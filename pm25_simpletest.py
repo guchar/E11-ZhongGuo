@@ -73,6 +73,7 @@ while itime < (start_time + run_time):
     time.sleep(1)
     current_time = time.time()
     myobj = datetime.now()
+    itime = time.time() 
 
     
     # writer.writerow("Current timestamp: ") 
