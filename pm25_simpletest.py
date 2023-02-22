@@ -55,9 +55,7 @@ pm25 = PM25_UART(uart, reset_pin)
 
 print("Found PM2.5 sensor, reading data...")
 
-start_time = time.time()
 run_time = int(sys.argv[1])
-itime = start_time
 
 datafile = sys.argv[2]
 file = open(datafile, "w")
@@ -75,6 +73,9 @@ i2c = board.I2C()
 bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c)
 bme680.sea_level_pressure=1013.25
 count_time = 0
+
+start_time = time.time()
+itime = start_time
 
 metadata = ["Timestamp", "PM 1.0", "PM 2.5", "PM 10", "Temperature", "Gas", "Humidity", "Pressure", "Altitude"]
 
