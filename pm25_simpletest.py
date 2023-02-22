@@ -63,6 +63,12 @@ datafile = sys.argv[2]
 file = open(datafile, "w")
 writer = csv.writer(file)
 
+delay = sys.argv[3]
+delay_start = time.time() 
+itime2 = delay_start 
+
+while itime2 < (delay_start + delay):
+    itime2 = time.time() 
 
 
 i2c = board.I2C()
