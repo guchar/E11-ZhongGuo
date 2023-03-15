@@ -1,0 +1,48 @@
+# coding=utf-8
+ 
+import RPi.GPIO as GPIO
+import datetime
+
+counts = 0
+
+run_time = int(sys.argv[1])
+datafile = sys.argv[2]
+file = open(datafile, "w")
+writer = csv.writer(file)
+
+delay_start = time.time()
+itime2 = delay_start
+while itime2 < (delay_start + 60):
+    itime2 = time.time()
+
+start_time = time.time()
+itime = start_time
+second_count = 0
+num_minutes = 0
+metadata = ['Timestamp', 'Counts Per Minute']
+writer.writerow(metadata)
+while itime < (start_time + run_time):
+
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(6, GPIO.IN)
+    GPIO.add_event_detect(6, GPIO.BOTH, callback=my_callback)
+
+    itime = time.time()
+    second_count += 1
+
+def my_callback(channel):
+    if GPIO.input(channel) == GPIO.HIGH:
+        if second_count % 60 == 0:
+            data = [datetime.datetime.now(), num_minutes, ":”， count]
+            count = 0
+            num_minutes += 1
+        else:
+            data = [datetime.datetime.now()]
+            count += 1
+        writer.writerow(data)
+
+ 
+finally:
+    GPIO.cleanup()
+ 
+print("Goodbye!")
