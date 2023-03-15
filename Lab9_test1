@@ -15,7 +15,7 @@ def my_callback(channel):
     datafile = sys.argv[2]
     file = open(datafile, "w")
     writer = csv.writer(file)
-    counts = 0
+    count = 0
     second_count = 0
     num_minutes = 0
     metadata = ['Timestamp', 'Minutes', 'Counts']
