@@ -12,6 +12,17 @@ import board
 
 counts = 0
 
+def my_callback(channel):
+    if GPIO.input(channel) == GPIO.HIGH:
+        if second_count % 60 == 0:
+            data = [datetime.datetime.now(), num_minutes, count]
+            count = 0
+            num_minutes += 1
+        else:
+            data = [datetime.datetime.now()]
+            count += 1
+        writer.writerow(data)
+
 run_time = int(sys.argv[1])
 datafile = sys.argv[2]
 file = open(datafile, "w")
@@ -37,16 +48,7 @@ while itime < (start_time + run_time):
     itime = time.time()
     second_count += 1
 
-def my_callback(channel):
-    if GPIO.input(channel) == GPIO.HIGH:
-        if second_count % 60 == 0:
-            data = [datetime.datetime.now(), num_minutes, count]
-            count = 0
-            num_minutes += 1
-        else:
-            data = [datetime.datetime.now()]
-            count += 1
-        writer.writerow(data)
+
 
 GPIO.cleanup()
  
