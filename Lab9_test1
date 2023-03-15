@@ -8,10 +8,13 @@ import argparse
 import sys
 from datetime import date
 import time
-import board
 
 
 def my_callback(channel):
+    run_time = int(sys.argv[1])
+    datafile = sys.argv[2]
+    file = open(datafile, "w")
+    writer = csv.writer(file)
     counts = 0
     second_count = 0
     num_minutes = 0
@@ -35,19 +38,14 @@ def my_callback(channel):
         itime = time.time()
         second_count += 1
 
-run_time = int(sys.argv[1])
-datafile = sys.argv[2]
-file = open(datafile, "w")
-writer = csv.writer(file)
-
 
 try:
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(6, GPIO.IN)
     GPIO.add_event_detect(6, GPIO.BOTH, callback=my_callback)
-
-my_callback(6)
-
+ 
+    message = input('\nPress any key to exit.\n')
+ 
 finally:
     GPIO.cleanup()
  
