@@ -19,7 +19,7 @@ start_time = time.time()
 itime = start_time
 second_count = 0
 num_minutes = 0
-metadata = ['Timestamp', ’Minutes', 'Counts']
+metadata = ['Timestamp', 'Minutes', 'Counts']
 writer.writerow(metadata)
 while itime < (start_time + run_time):
 
