@@ -41,8 +41,6 @@ def my_callback(channel):
             count += 1
         writer.writerow(data)
 
- 
-finally:
-    GPIO.cleanup()
+GPIO.cleanup()
  
 print("Goodbye!")
