@@ -46,6 +46,8 @@ try:
     GPIO.setup(6, GPIO.IN)
     GPIO.add_event_detect(6, GPIO.BOTH, callback=my_callback)
 
+my_callback(6)
+
 finally:
     GPIO.cleanup()
  
