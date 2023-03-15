@@ -38,13 +38,14 @@ itime = start_time
 second_count = 0
 num_minutes = 0
 metadata = ['Timestamp', 'Minutes', 'Counts']
-writer.writerow(metadata)
+writer.writerow
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(6, GPIO.IN)
+GPIO.add_event_detect(6, GPIO.BOTH, callback=my_callback)
+
 while itime < (start_time + run_time):
-
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(6, GPIO.IN)
-    GPIO.add_event_detect(6, GPIO.BOTH, callback=my_callback)
-
+    my_callback(6)
     itime = time.time()
     second_count += 1
 
