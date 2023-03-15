@@ -20,15 +20,18 @@ def my_callback(channel):
     writer.writerow(metadata)
     start_time = time.time()
     itime = start_time
+    print('function')
     while itime < (start_time + run_time):
         if GPIO.input(channel) == GPIO.HIGH:
             if second_count % 60 == 0:
                 data = [time.time(), num_minutes, count]
                 count = 0
                 num_minutes += 1
+                print('in the if')
             else:
                 data = [time.time()]
                 count += 1
+                print('in the else')
             writer.writerow(data)
         itime = time.time()
         second_count += 1
