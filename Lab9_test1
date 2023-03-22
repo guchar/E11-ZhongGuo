@@ -14,7 +14,7 @@ intervals= int(sys.argv[2])
 datafile = sys.argv[3]
 file = open(datafile, "w")
 writer = csv.writer(file)
-metadata = ['Timestamp', 'Minutes', 'Counts']
+metadata = ['Timestamp', 'Counts']
 writer.writerow(metadata)
 count = 0
 second_count = 0
