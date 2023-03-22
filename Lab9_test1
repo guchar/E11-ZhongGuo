@@ -24,6 +24,7 @@ itime = start_time
 
 
 def my_callback(channel):
+    print(time.time())
     global count 
     count += 1
 
