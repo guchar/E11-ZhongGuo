@@ -10,29 +10,29 @@ from datetime import date
 import time
 
 run_time = int(sys.argv[1])
-datafile = sys.argv[2]
+intervals= int(sys.argv[2])
+datafile = sys.argv[3]
 file = open(datafile, "w")
 writer = csv.writer(file)
 metadata = ['Timestamp', 'Minutes', 'Counts']
 writer.writerow(metadata)
 count = 0
 second_count = 0
-num_minutes = 0
     
 start_time = time.time()
 itime = start_time
 
 
 def my_callback(channel):
-    print(time.time())
-    # if second_count % 60 == 0:
-    #     data = [time.time(), num_minutes, count]
-    #             count = 0
-    #             num_minutes += 1
-    #         else:
-    #             data = [time.time()]
-    #             count += 1
-    #         writer.writerow(data)
+    if second_count % intervals == 0:
+        data = [time.time(), count]
+        writer.writerow(data)
+        count = 0
+        second_count = 0
+
+    else:
+        count += 1
+        second_count += 1
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(6, GPIO.IN)
