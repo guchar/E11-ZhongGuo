@@ -24,25 +24,19 @@ itime = start_time
 
 
 def my_callback(channel):
-    if second_count % intervals == 0:
-        data = [time.time(), count]
-        writer.writerow(data)
-        count = 0
-        second_count = 0
-
-    else:
-        count += 1
-        second_count += 1
+    global count 
+    count += 1
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(6, GPIO.IN)
 GPIO.add_event_detect(6, GPIO.FALLING, callback=my_callback)
 
 while itime < (start_time + run_time):
-    time.sleep(10)
+    time.sleep(intervals)
+    data = [time.time(), count]
+    writer.writerow(data)
     itime = time.time()
-    second_count += 1
-
+    count = 0
 
     
 
