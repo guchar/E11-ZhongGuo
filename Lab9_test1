@@ -39,7 +39,7 @@ while itime < (start_time + run_time):
     itime = time.time()
     count = 0
 
-    
+file.close()
 
 
 
